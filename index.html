@@ -12,9 +12,10 @@
     <div class="content">
         <div class="catalog">
             <ul class="list">
-                <li class="item" v-for="(key, catalog) in catalogs | orderBy 'id' 1" @click="taskOfCatalogId = catalog.id">
+                <li class="item" v-for="catalog in catalogs.catalogs | orderBy 'id' 1" @click="taskOfCatalogId = catalog.id" :class="{active: catalog.id == taskOfCatalogId}">
                     <label>
-                        {{ catalog.name }} {{ tasks[catalog.id].length }}
+                        {{ catalog.name }} 
+                        {{ tasks[catalog.id].length }}
                     </label>
                 </li>
             </ul>
@@ -23,42 +24,45 @@
             </div>
         </div>
         <div class="task">
-            <div class="state">
-                <a href="#" class="btn">所有</a>
-                <a href="#" class="btn">未完成</a>
-                <a href="#" class="btn">已完成</a>
-            </div>
             <div class="list">
-                <div class="item" v-for="task in showTasks">
-                {{ task.title }}
+                <div class="item" v-for="task in tasks[taskOfCatalogId]" @click="editTask = task" :class="{active: task == editTask}">
+                    {{ task.title }}
+                    <div class="date">
+                        {{ task.updateTime }}
+                    </div>
                 </div>
             </div>
-            <div class="add" v-on:click="addTask">
+            <div class="add" @click="addTask">
                 新增任务
             </div>
         </div>
         <div class="detail">
             <div class="detail-title">
-                <div class="note-text"></div>
-                <a href="#" class="btn btn-edit">编辑</a>
-                <a href="#" class="btn btn-delete">删除</a>
-                <a href="#" class="btn btn-save">保存</a>
+                <div class="btns">
+                    <a href="#" class="btn btn-edit" @click="editable = true">编辑</a>
+                    <a href="#" class="btn btn-delete">删除</a>
+                    <a href="#" class="btn btn-save" @click="saveTask">保存</a>
+                </div>
+                <div class="note-text" contenteditable="{{ editable }}" v-text="editTask.title">
+                </div>
             </div>
             <div class="detail-date">
-                2015-03-04
+                <div v-show="editTask.createTime">
+                    创建于: {{ editTask.createTime }}
+                    更新于：{{ editTask.updateTime }}
+                </div>
             </div>
-            <div class="edit-content" contenteditable="true">
-                
+            <div class="edit-content" contenteditable="{{ editable }}" v-text="editTask.content">
             </div>
         </div>
     </div>
-
     <div class="model" v-show="model">
         <div class="model-body">
             <input type="text" v-model="newCatalog"  v-on:keyup.enter="addCatalog" placeholder="输入分类名">
             <a class="btn" v-on:click="addCatalog">提交</a>
         </div>
     </div>
+    <!-- // <script src="js/vue.js"></script> -->
     <script src="http://cdn.bootcss.com/vue/1.0.0/vue.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/note.js"></script>

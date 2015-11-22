@@ -32,8 +32,8 @@ a {
   padding: 5px;
   cursor: pointer;
   background-color: rgba(10, 10, 10, 0.1);
-  border-radius: 4px;
   border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 /*头部*/
@@ -70,10 +70,6 @@ a {
   border-right: 1px solid #ccc;
 }
 
-.task {
-  padding-top: 45px;
-}
-
 .catalog {
   float: left;
   width: 200px;
@@ -96,14 +92,14 @@ a {
 
 .catalog .list {
   height: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 .catalog .item {
   cursor: pointer;
+  background-color: #eff;
+  border-bottom: 1px solid #cfe;
 }
 
 .catalog .item.active,
@@ -125,16 +121,6 @@ a {
 
 /*中间任务列表*/
 
-.task .state {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 45px;
-  line-height: 45px;
-  background-color: #e6e6e6;
-  border-bottom: 1px solid #ccc;
-}
-
 .task .btn {
   position: relative;
   left: 60px;
@@ -148,9 +134,15 @@ a {
 
 .task .item {
   padding: 10px 25px;
+  word-break: break-all;
   cursor: pointer;
   background-color: #eff;
   border-bottom: 1px solid #cfe;
+}
+
+.task .item .date {
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .task .item.active,
@@ -172,13 +164,12 @@ a {
 }
 
 .detail-title .note-text {
-  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
-.detail-title .btn {
-  position: relative;
-  left: 30px;
-  display: inline;
+.detail-title .btns {
+  float: right;
 }
 
 .detail-date {
@@ -188,7 +179,9 @@ a {
   left: 500px;
   height: 40px;
   padding-left: 20px;
+  font-size: 0.9em;
   line-height: 40px;
+  color: #bbb;
   background-color: #fbfbfb;
   border-bottom: 1px solid #ccc;
 }
