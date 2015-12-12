@@ -1,13 +1,11 @@
 var storage = new Storage();
-
-
 var vm = new Vue({
     el: 'body',
     data: {
         tasks: storage.fetchTask(),
         catalogs: storage.fetchCatalog(),
-        taskOfCatalogId: 0,
-        editTask: {},
+        taskOfCatalogId: storage.getCid(),
+        editTask: storage.getEditTask(),
         editable: false,
         newCatalog: '',
         model: false,
@@ -35,30 +33,40 @@ var vm = new Vue({
                 Vue.set(this.tasks, len, []);
                 this.newCatalog = '';
                 this.model = false;
+                this.taskOfCatalogId = len;
             }
         },
-        addTask: function() {
+        removeCatalog: function(catalog) {
+            this.catalogs.catalogs.$remove(catalog);
+        },
+        removeTask: function() {
+            this.tasks[this.taskOfCatalogId].$remove(this.editTask);
+        },
+        toggleTaskPanel: function() {
             this.editable = true;
             this.editTask = {};
-            document.getElementsByClassName('note-text')[0].textContent = '';
-            document.getElementsByClassName('edit-content')[0].textContent = '';
+            document.getElementsByClassName('note-text')[0].innerHTML = '';
+            document.getElementsByClassName('edit-content')[0].innerHTML = '';
         },
         saveTask: function() {
             if (!this.editable) 
                 return;
             var id = this.taskOfCatalogId;
             var title = document.getElementsByClassName('note-text')[0].textContent.trim();
-            var content = document.getElementsByClassName('edit-content')[0].textContent.trim();
+            var content = document.getElementsByClassName('edit-content')[0].innerHTML.trim();
             if (!this.editTask.title && title) {
-                this.tasks[id].push({
+                var task = {
                     title: title,
                     content: content,
                     size: content.length,
                     createTime: new Date().toLocaleString('en-GB', {hour12:false}),
                     updateTime: new Date().toLocaleString('en-GB', {hour12:false})
-                });
+                };
+                this.tasks[id].push(task);
+                this.editTask = task;
+
             } else {
-                this.editTask.title = title;
+                this.editTask.title = title ? title: 'untitled';
                 this.editTask.content = content;
                 this.editTask.size = content.length;
                 this.editTask.updateTime = new Date().toLocaleString('en-GB', {hour12:false});
@@ -70,23 +78,31 @@ var vm = new Vue({
         catalogs: {
             handler: function(catalogs) {
                 storage.saveCatalog(catalogs);
-                console.log('catalog save');
             },
             deep: true,
         },
         editable: {
             handler: function() {
                 storage.saveTask(this.tasks);
-                console.log('task save');
             },
             deep: true,
         },
         tasks: {
-            handler: function(newtasks, oldtasks) {
-                console.log(newtasks);
-                console.log(oldtasks);
+            handler: function(tasks) {
+                storage.saveTask(this.tasks);
             },
             deep: true,
+        },
+        taskOfCatalogId: {
+            handler: function(cid) {
+                storage.saveCid(cid);
+                this.editTask = this.tasks[cid][0] || {};
+            }
+        },
+        editTask: {
+            handler: function(task) {
+                storage.saveEditTask(task);
+            }
         }
     },
     filter: {
@@ -96,6 +112,6 @@ var vm = new Vue({
     }
 });
 
-Vue.config.debug = true;
+
 
 

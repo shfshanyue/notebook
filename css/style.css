@@ -9,7 +9,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+  font-family: "Lucida Console", Helvetica, "Microsoft Yahei", "Hiragino Sans GB", sans-serif;
 }
 
 ul {
@@ -98,13 +98,13 @@ a {
 
 .catalog .item {
   cursor: pointer;
-  background-color: #eff;
-  border-bottom: 1px solid #cfe;
+  /*background-color: #eff;*/
+  border-bottom: 1px solid #eee;
 }
 
 .catalog .item.active,
 .catalog .item:hover {
-  background-color: #ffc;
+  background-color: #eee;
 }
 
 .add {
@@ -117,6 +117,14 @@ a {
   line-height: 39px;
   text-align: center;
   border-top: 1px solid #aaa;
+  cursor: pointer;
+}
+
+.delete {
+  color: #aaa;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
 }
 
 /*中间任务列表*/
@@ -136,7 +144,7 @@ a {
   padding: 10px 25px;
   word-break: break-all;
   cursor: pointer;
-  background-color: #eff;
+  background-color: #fff;
   border-bottom: 1px solid #cfe;
 }
 
@@ -147,10 +155,19 @@ a {
 
 .task .item.active,
 .task .item:hover {
-  background-color: #ffc;
+  background-color: #eee;
 }
 
 /*右侧笔记区域*/
+.detail-box {
+  height: 100%;
+}
+
+.detail-date.editing,
+.detail-title.editing,
+.edit-content.editing {
+  border-left: 3px solid #aaa;
+}
 
 .detail-title {
   position: absolute;
@@ -189,8 +206,9 @@ a {
 .edit-content {
   height: 100%;
   padding: 110px 20px 20px;
-  font-size: 1.2em;
+  font-size: 1.1em;
   word-wrap: break-word;
+  font-family: "Source Code Pro",Consolas,Menlo,Monaco,"Courier New",monospace
 }
 
 /* 模态框*/

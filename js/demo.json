@@ -4,18 +4,15 @@
         "catalogs": [
             {
                 "id": 0,
-                "name": "python",
-                "length": 4
+                "name": "python"
             },
             {
                 "id": 1,
-                "name": "javascript",
-                "length": 5
+                "name": "javascript"
             },
             {
                 "id": 2,
-                "name": "css",
-                "length": 5
+                "name": "css"
             }
         ]
     },
