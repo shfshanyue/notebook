@@ -104,11 +104,6 @@ var vm = new Vue({
                 storage.saveEditTask(task);
             }
         }
-    },
-    filter: {
-        'reverse': function(value) {
-            return value.split('').reverse().join('');
-        }
     }
 });
 

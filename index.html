@@ -10,7 +10,7 @@
     <div class="header">
         <div class="title">笔记本</div>
     </div>
-    <div class="content" v-cloak>
+    <div class="content">
         <div class="catalog">
             <ul class="list">
                 <li class="item" v-for="catalog in catalogs.catalogs | orderBy 'id' 1" @click="taskOfCatalogId = catalog.id" :class="{active: catalog.id == taskOfCatalogId}">
@@ -25,10 +25,8 @@
         </div>
         <div class="task">
             <div class="list">
-                <div class="item" v-for="task in tasks[taskOfCatalogId]" @click="editTask = task" :class="{active: task == editTask || task.title == editTask.title}">
-                    {{ task.title }}
-                    <div class="date">
-                        {{ task.updateTime }}
+                <div class="item" v-for="task in tasks[taskOfCatalogId]" @click="editTask = task" :class="{active: task == editTask || task.title == editTask.title}" v-text="task.title">
+                    <div class="date" v-text="task.updateTime">
                     </div>
                 </div>
             </div>
@@ -41,14 +39,14 @@
                 <div class="detail-title" :class="{editing: editable}">
                     <div class="btns">
                         <a class="btn btn-edit" @click="editable = true" v-show="!editable">编辑</a>
-                        <a class="btn btn-delete" v-show="!editable" @click="removeTask">删除</a>
+                        <a class="btn btn-delete" @click="removeTask" v-show="!editable">删除</a>
                         <a class="btn btn-save" @click="saveTask" v-show="editable">保存</a>
                     </div>
                     <div class="note-text" contenteditable="{{ editable }}" v-text="editTask.title">
                     </div>
                 </div>
                 <div class="detail-date" :class="{editing: editable}">
-                    <div v-show="editTask.createTime">
+                    <div v-show="editTask.createTime" v-cloak>
                         创建于: {{ editTask.createTime }}
                         更新于：{{ editTask.updateTime }}
                     </div>
@@ -65,7 +63,6 @@
         </div>
     </div>
     <script src="js/vue.js"></script>
-    <!-- // <script src="http://cdn.bootcss.com/vue/1.0.0/vue.js"></script> -->
     <script src="js/storage.js"></script>
     <script src="js/note.js"></script>
 </body>
