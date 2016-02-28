@@ -1,0 +1,248 @@
+/*reset*/
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: "Lucida Console", Helvetica, "Microsoft Yahei", "Hiragino Sans GB", sans-serif;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: block;
+  padding-left: 25px;
+  line-height: 35px;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+.btn {
+  padding: 5px;
+  cursor: pointer;
+  background-color: rgba(10, 10, 10, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/*头部*/
+
+.header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 55px;
+  padding-left: 20px;
+  line-height: 55px;
+  background-color: #c7c7c7;
+  border-bottom: 1px solid #aaa;
+}
+
+.title {
+  font-size: 1.6em;
+  line-height: 55px;
+  color: #888;
+}
+
+/*内容区大致布局*/
+
+.content {
+  height: 100%;
+  padding-top: 55px;
+}
+
+.catalog,
+.task {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 41px;
+  border-right: 1px solid #ccc;
+  user-select: none;
+}
+
+.catalog {
+  float: left;
+  width: 200px;
+  height: 100%;
+}
+
+.task {
+  float: left;
+  width: 300px;
+  height: 100%;
+}
+
+.detail {
+  position: relative;
+  height: 100%;
+  padding-left: 500px;
+}
+
+/*左侧目录*/
+
+.catalog .list {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.catalog .item {
+  cursor: pointer;
+  border-bottom: 1px solid #cfe;
+}
+
+.task .item.active,
+.task .item.active:hover,
+.item.active:hover,
+.item.active {
+  background-color: #eaeaea;
+}
+
+.task .item:hover,
+.item:hover {
+  background-color: #f4f4f4;
+}
+
+.add {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 40px;
+  line-height: 39px;
+  text-align: center;
+  border-top: 1px solid #aaa;
+  cursor: pointer;
+}
+
+.delete {
+  color: #aaa;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+}
+
+/*中间任务列表*/
+
+.task .btn {
+  position: relative;
+  left: 60px;
+}
+
+.task .list {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.task .item {
+  padding: 10px 25px;
+  word-break: break-all;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #cfe;
+}
+
+.task .item .date {
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+
+/*右侧笔记区域*/
+.detail-box {
+  height: 100%;
+}
+
+.detail-date.editing,
+.detail-title.editing,
+.edit-content.editing {
+  border-left: 3px solid #aaa;
+}
+
+.detail-title {
+  position: absolute;
+  right: 0;
+  left: 500px;
+  height: 50px;
+  padding: 8px 20px;
+  line-height: 33px;
+  background-color: #fbfbfb;
+  border-bottom: 1px solid #ccc;
+}
+
+.detail-title .note-text {
+  width: 100%;
+  height: 100%;
+}
+
+.detail-title .btns {
+  float: right;
+}
+
+.detail-date {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  left: 500px;
+  height: 40px;
+  padding-left: 20px;
+  font-size: 0.9em;
+  line-height: 40px;
+  color: #bbb;
+  background-color: #fbfbfb;
+  border-bottom: 1px solid #ccc;
+}
+
+.edit-content {
+  height: 100%;
+  padding: 110px 20px 20px;
+  font-size: 1.1em;
+  word-wrap: break-word;
+  font-family: "Source Code Pro",Consolas,Menlo,Monaco,"Courier New",monospace
+}
+
+/* 模态框*/
+
+.model {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  width: 300px;
+  height: 100px;
+  background-color: #fff;
+  border: 1px solid #eef;
+  transform: translate(-50%, -50%);
+  box-shadow: 2px 2px 4px -1px rgba(0, 0, 0, 0.25);
+}
+
+.model-body {
+  height: 100%;
+  line-height: 100px;
+  text-align: center;
+}
+
+.model input {
+  width: 220px;
+  height: 30px;
+  padding-left: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.model input:focus {
+  border: 1px solid #aaa;
+}

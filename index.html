@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>notebook</title>
+        <link rel="stylesheet" href="src/assets/style.css">
+        <style>
+        [v-cloak] {
+            display: none;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <div class="title">笔记本</div>
+        </div>
+        <div class="content">
+            <div class="catalog">
+                <ul class="list">
+                    <li class="item" v-for="catalog in catalog.catalogs | orderBy 'id' 1" @click="activeCatalogId = catalog.id" :class="{active: activeCatalogId === catalog.id}">
+                        {{ catalog.name }}
+                        <label @click="removeCatalog(catalog)" class="delete">&times;</label>
+                    </li>
+                </ul>
+                <div class="add" @click="showModel">
+                    新增分类
+                </div>
+            </div>
+            <div class="task">
+                <div class="list">
+                    <div class="item" v-for="task in task.tasks | filterBy activeCatalogId in 'pid'" @click="activeTask = task" :class="{active: activeTask === task}" v-cloak> 
+                        {{ task.title }}
+                        <div class="date" v-text="task.updateTime">
+                        </div>
+                    </div>
+                </div>
+                <div class="add" @click="showModel">
+                    新增笔记
+                </div>
+            </div>
+            <div class="detail">
+                <div class="detail-box">
+                    <div class="detail-title" :class="{editing: editable}">
+                        <div class="btns">
+                            <a class="btn btn-edit" @click="editable = true" v-show="!editable">编辑</a>
+                            <a class="btn btn-delete" v-show="!editable" @click="removeTask">删除</a>
+                            <a class="btn btn-save" @click="saveTask" v-show="editable">保存</a>
+                        </div>
+                        <div class="note-text" contenteditable="{{ editable }}" v-text="activeTask.title">
+                        </div>
+                    </div>
+                    <div class="detail-date" :class="{editing: editable}">
+                        <div v-show="activeTask.createTime" v-cloak>
+                            创建于: {{ activeTask.createTime }}
+                            更新于：{{ activeTask.updateTime }}
+                        </div>
+                    </div>
+                    <div class="edit-content" :class="{editing: editable}" :contenteditable="editable" v-html="activeTask.content">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="dist/build.js"></script>
+    </body>
+</html>
