@@ -85,8 +85,6 @@ var vm = new Vue({
             this.activeTask = this.task.tasks.filter(key => key.pid===value)[0] || {};
             this.save('activeCatalogId', value);
         }
-
-
     },
     computed: {
 
